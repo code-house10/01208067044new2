@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TKV5QQL3');</script>
+<!-- End Google Tag Manager -->
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة المازن إكسبريس | خدمات نقل وتغليف الأثاث العصرية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#1B3A57', // Deep Blue
+                        'secondary': '#4AC7C7', // Vibrant Teal
+                        'accent': '#F2C94C', // Soft Yellow
+                        'light-bg': '#F7F9FC',
+                        'dark-text': '#2D3748',
+                        'light-text': '#F7F9FC',
+                    },
+                    fontFamily: {
+                        'el-messiri': ['El Messiri', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'El Messiri', sans-serif;
+        }
+        .hero-slideshow {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 1;
+        }
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(27, 58, 87, 0.6);
+            z-index: 3;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 4;
+        }
+        .section-title {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background-color: #4AC7C7; /* secondary color */
+            border-radius: 2px;
+        }
+        .service-card, .testimonial-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover, .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        /* Modal Styles */
+        .modal-step { display: none; }
+        .modal-step.active { display: block; }
+        
+        /* Review Popup Styles */
+        #reviews-popup {
+            transition: opacity 0.5s, transform 0.5s;
+            transform: translateX(100%);
+        }
+        #reviews-popup.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-light-bg text-dark-text font-el-messiri">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKV5QQL3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+    <!-- Floating Offer Banner -->
+    <div id="offer-banner" class="fixed bottom-5 left-[10px] z-50 bg-primary text-white p-4 pr-10 rounded-lg shadow-lg flex items-center space-x-4 space-x-reverse transition-transform duration-500 transform translate-y-full">
+        <div>
+            <p class="font-bold">عرض خاص! خصم 25%</p>
+            <div class="flex items-baseline">
+                <p class="text-sm ml-1">ينتهي خلال:</p>
+                <div id="countdown" class="text-lg font-mono font-bold">
+                    <span id="hours">02</span>:<span id="minutes">59</span>:<span id="seconds">59</span>
+                </div>
+            </div>
+        </div>
+        <button class="call-btn bg-secondary text-white rounded-full h-12 w-12 flex-shrink-0 flex items-center justify-center shadow-md hover:bg-opacity-80 transition-transform transform hover:scale-110">
+            <i class="fas fa-phone-alt text-xl"></i>
+        </button>
+        <button id="close-banner" class="absolute top-1 right-2 text-white hover:text-gray-200 text-lg">&times;</button>
+    </div>
+
+    <!-- Floating Call Button -->
+    <button class="call-btn fixed bottom-5 right-5 z-50 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-transform transform hover:scale-110 animate-pulse">
+        <i class="fas fa-phone-alt text-2xl"></i>
+    </button>
+
+    <!-- Reviews Popup -->
+    <div id="reviews-popup" class="fixed top-[105px] left-[10px] sm:top-5 z-50 bg-white p-4 rounded-lg shadow-2xl w-80 opacity-0">
+        <button id="close-reviews" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600">&times;</button>
+        <div id="review-content">
+            <!-- Review content will be injected here -->
+        </div>
+        <div class="flex items-center justify-between mt-3 pt-2 border-t">
+            <div class="flex items-center">
+                <svg class="w-5 h-5 ml-2" viewBox="0 0 48 48"><path fill="#4285F4" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"></path></svg>
+                <span class="text-sm font-semibold text-gray-600">تقييمات Google</span>
+            </div>
+            <div id="review-stars" class="flex items-center text-accent">
+                <!-- Stars will be injected here -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Top Bar -->
+    <div class="bg-primary text-light-text text-sm">
+        <div class="container mx-auto flex justify-between items-center py-2 px-4">
+            <div>
+                <a href="tel:01080837311" class="call-btn hover:text-secondary transition-colors"><i class="fas fa-phone-alt ml-2"></i> 01080837311</a>
+                <span class="mx-2">|</span>
+                <a href="mailto:" class="hover:text-secondary transition-colors"><i class="fas fa-envelope ml-2"></i> </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hover:text-secondary transition-colors"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-secondary transition-colors"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-secondary transition-colors"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-secondary transition-colors"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto flex justify-between items-center py-4 px-4 md:px-8">
+            <a href="#" class="text-3xl font-bold text-primary">المازن إكسبريس<span class="text-secondary">.</span></a>
+            <nav class="hidden lg:flex space-x-8 space-x-reverse font-semibold">
+                <a href="#" class="text-secondary border-b-2 border-secondary pb-1">الرئيسية</a>
+                <a href="#about" class="hover:text-secondary transition-colors">من نحن</a>
+                <a href="#services" class="hover:text-secondary transition-colors">خدماتنا</a>
+                <a href="#testimonials" class="hover:text-secondary transition-colors">آراء العملاء</a>
+                <a href="#faq" class="hover:text-secondary transition-colors">الأسئلة الشائعة</a>
+                <a href="#contact" class="hover:text-secondary transition-colors">اتصل بنا</a>
+            </nav>
+            <a href="#contact" class="call-btn hidden lg:inline-block bg-secondary text-white font-bold px-6 py-2 rounded-full hover:bg-opacity-90 transition-colors shadow-lg">اطلب عرض سعر</a>
+            <button id="mobile-toggle" class="lg:hidden text-2xl text-primary"><i class="fas fa-bars"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden bg-white border-t border-gray-200">
+            <a href="#" class="block py-3 px-4 text-secondary border-b">الرئيسية</a>
+            <a href="#about" class="block py-3 px-4 hover:bg-gray-50">من نحن</a>
+            <a href="#services" class="block py-3 px-4 hover:bg-gray-50">خدماتنا</a>
+            <a href="#testimonials" class="block py-3 px-4 hover:bg-gray-50">آراء العملاء</a>
+            <a href="#faq" class="block py-3 px-4 hover:bg-gray-50">الأسئلة الشائعة</a>
+            <a href="#contact" class="block py-3 px-4 hover:bg-gray-50">اتصل بنا</a>
+            <div class="p-4">
+                 <a href="#contact" class="call-btn block text-center w-full bg-secondary text-white font-bold px-6 py-2 rounded-full hover:bg-opacity-90 transition-colors shadow-lg">اطلب عرض سعر</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-slideshow text-white">
+            <div class="hero-slide active" style="background-image: url('images/main-car.webp');"></div>
+            <div class="hero-slide" style="background-image: url('images/main-1car.webp');"></div>
+            <div class="hero-slide" style="background-image: url('images/trucks33.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('images/worjers.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('images/workers (1).jpg');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content container mx-auto px-4 h-full flex flex-col justify-center items-start">
+                <div class="max-w-2xl text-right">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">نقل أثاثك بأمان وثقة تامة</h1>
+                    <p class="text-lg md:text-xl text-light-text mb-8">نقدم حلول نقل متكاملة تجمع بين الدقة، السرعة، والأمان. شريكك الموثوق للحفاظ على ممتلكاتك.</p>
+                    <button class="call-btn bg-secondary text-white font-bold px-10 py-4 rounded-full hover:bg-opacity-90 transition-transform transform hover:scale-105 shadow-2xl text-lg">احصل على عرض سعر مجاني</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="relative">
+                        <img src="images/worjers.jpg" alt="فريق العمل" class="rounded-lg shadow-2xl w-full">
+                        <div class="absolute -bottom-8 left-[6px] bg-primary text-white p-6 rounded-lg shadow-lg flex items-center w-3/4">
+                            <i class="fas fa-shield-alt text-5xl text-secondary ml-4"></i>
+                            <div>
+                                <p class="font-bold text-lg">ضمان كامل على جميع المنقولات</p>
+                                <p class="text-sm text-gray-300">سلامة أثاثك هي أولويتنا القصوى.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary">خبرة تمتد لأكثر من 15 عاماً</h2>
+                        <p class="text-gray-600 mb-6 leading-relaxed">نحن لسنا مجرد شركة نقل، بل شريكك الموثوق للحفاظ على ممتلكاتك. منذ تأسيسنا، قمنا بخدمة آلاف العملاء، مقدمين حلول نقل متكاملة تجمع بين الدقة، السرعة، والأمان.</p>
+                        <a href="#services" class="text-secondary font-semibold hover:underline">اكتشف خدماتنا <i class="fas fa-arrow-left mr-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stats Bar -->
+        <div class="bg-primary text-white">
+            <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center py-12">
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-users text-4xl mb-3 text-secondary"></i>
+                    <span class="text-3xl font-bold" data-target="12000" data-prefix="+">0</span>
+                    <span class="font-semibold mt-1">عميل سعيد</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-box text-4xl mb-3 text-secondary"></i>
+                    <span class="text-3xl font-bold" data-target="50000" data-suffix="+">0</span>
+                    <span class="font-semibold mt-1">قطعة منقولة</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-truck text-4xl mb-3 text-secondary"></i>
+                    <span class="text-3xl font-bold" data-target="150" data-suffix="+">0</span>
+                    <span class="font-semibold mt-1">سيارة نقل</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-award text-4xl mb-3 text-secondary"></i>
+                    <span class="text-3xl font-bold" data-target="10">0</span>
+                    <span class="font-semibold mt-1">سنوات خبرة</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 md:py-24 bg-light-bg">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-primary">خدماتنا المتكاملة</h2>
+                <p class="text-gray-600 mb-12 max-w-2xl mx-auto">نقدم كل ما تحتاجه لتجربة نقل مريحة وسلسة، من الباب إلى الباب.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-right">
+                    <!-- Service Cards -->
+                    <div class="service-card bg-white p-6 rounded-lg shadow-lg flex flex-col">
+                        <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/packing.jpg" alt="تغليف الأثاث" class="rounded-md mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-bold mb-2 text-primary">تغليف احترافي للأثاث</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">نستخدم أفضل مواد التغليف لحماية أثاثك من الخدوش والكسر أثناء النقل.</p>
+                        <a href="#" class="text-secondary font-semibold hover:underline self-start">اعرف المزيد</a>
+                    </div>
+                    <div class="service-card bg-white p-6 rounded-lg shadow-lg flex flex-col">
+                        <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/2workers.png" alt="فك وتركيب الأثاث" class="rounded-md mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-bold mb-2 text-primary">فك وتركيب الأثاث</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">فنيون متخصصون في فك وتركيب جميع أنواع غرف النوم والمطابخ والمكاتب.</p>
+                        <a href="#" class="text-secondary font-semibold hover:underline self-start">اعرف المزيد</a>
+                    </div>
+                    <div class="service-card bg-white p-6 rounded-lg shadow-lg flex flex-col">
+                        <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/truck.jpg" alt="نقل آمن" class="rounded-md mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-bold mb-2 text-primary">سيارات نقل مجهزة</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">أسطول من السيارات المغلقة والمجهزة لضمان وصول أثاثك بأمان تام.</p>
+                        <a href="#" class="text-secondary font-semibold hover:underline self-start">اعرف المزيد</a>
+                    </div>
+                     <div class="service-card bg-white p-6 rounded-lg shadow-lg flex flex-col">
+                        <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/A-111-Large-rotated-1.jpg" alt="تركيب الستائر والنجف" class="rounded-md mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-bold mb-2 text-primary">تركيب الستائر والنجف</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">نوفر فنيين لتركيب الستائر والنجف بحرفية عالية وكفاءة فائقة.</p>
+                        <a href="#" class="text-secondary font-semibold hover:underline self-start">اعرف المزيد</a>
+                    </div>
+                    <div class="service-card bg-white p-6 rounded-lg shadow-lg flex flex-col">
+                        <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/A-618-Large.jpg" alt="فك وتركيب الأجهزة" class="rounded-md mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-bold mb-2 text-primary">فك وتركيب الأجهزة</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">نتعامل بحرص مع الأجهزة الكهربائية كالتكييف والغسالات والسخانات.</p>
+                        <a href="#" class="text-secondary font-semibold hover:underline self-start">اعرف المزيد</a>
+                    </div>
+                    <div class="service-card bg-white p-6 rounded-lg shadow-lg flex flex-col">
+                        <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/A-139-Large-1536x1024.jpg" alt="خدمات تخزين الأثاث" class="rounded-md mb-4 w-full h-48 object-cover">
+                        <h3 class="text-xl font-bold mb-2 text-primary">خدمات تخزين الأثاث</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">مستودعات آمنة ومجهزة لتخزين أثاثك لفترات قصيرة أو طويلة.</p>
+                        <a href="#" class="text-secondary font-semibold hover:underline self-start">اعرف المزيد</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center text-primary">ماذا يقول عملاؤنا عنا؟</h2>
+                <div class="grid md:grid-cols-2 gap-8 mt-12">
+                    <div class="testimonial-card bg-light-bg p-8 rounded-lg shadow-lg text-right">
+                        <i class="fas fa-quote-right text-3xl text-secondary mb-4"></i>
+                        <p class="text-gray-700 leading-relaxed mb-6">“خدمة احترافية وموظفين مهرة جدًا، نقلوا عفشي بدون أي خدوش وبوقت قياسي.”</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/50x50/4AC7C7/fff?text=A" class="rounded-full ml-4" alt="أحمد محمود">
+                            <div>
+                                <p class="font-bold text-primary">أحمد محمود</p>
+                                <p class="text-sm text-gray-500">عميل من القاهرة</p>
+                            </div>
+                            <div class="mr-auto flex items-center">
+                                <i class="fas fa-star text-accent"></i>
+                                <i class="fas fa-star text-accent"></i>
+                                <i class="fas fa-star text-accent"></i>
+                                <i class="fas fa-star text-accent"></i>
+                                <i class="fas fa-star text-accent"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card bg-light-bg p-8 rounded-lg shadow-lg text-right">
+                        <i class="fas fa-quote-right text-3xl text-secondary mb-4"></i>
+                        <p class="text-gray-700 leading-relaxed mb-6">“أنصح بشدة! تعامل راقي وأسعار مناسبة جدًا.”</p>
+                        <div class="flex items-center">
+                           <img src="https://placehold.co/50x50/4AC7C7/fff?text=S" class="rounded-full ml-4" alt="سارة علي">
+                            <div>
+                                <p class="font-bold text-primary">سارة علي</p>
+                                <p class="text-sm text-gray-500">عميلة من الإسكندرية</p>
+                            </div>
+                            <div class="mr-auto flex items-center">
+                                <i class="fas fa-star text-accent"></i>
+                                <i class="fas fa-star text-accent"></i>
+                                <i class="fas fa-star text-accent"></i>
+                                <i class="fas fa-star text-accent"></i>
+                                <i class="fas fa-star-half-alt text-accent"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="py-16 md:py-24 bg-light-bg">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center text-primary">الأسئلة الشائعة</h2>
+                <div class="space-y-4 mt-12">
+                     <div class="bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full text-right font-semibold text-lg py-5 px-6 flex justify-between items-center" aria-expanded="false">
+                            كيف أطلب خدمة نقل عبر موقعكم؟
+                            <span class="text-secondary text-2xl transform transition-transform duration-300">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                            <p class="text-gray-600 px-6 pb-5">يمكنك ملء نموذج الطلب في قسم «اتصل بنا» أو التواصل معنا عبر الهاتف أو الواتساب. فريقنا جاهز للرد على استفساراتك وتحديد موعد للمعاينة.</p>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full text-right font-semibold text-lg py-5 px-6 flex justify-between items-center" aria-expanded="false">
+                            هل تغطون جميع محافظات مصر؟
+                            <span class="text-secondary text-2xl transform transition-transform duration-300">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                             <p class="text-gray-600 px-6 pb-5">نعم، لدينا أسطول متحرك وفروع تغطي القاهرة، الجيزة، الإسكندرية، ومعظم المدن الكبرى في جمهورية مصر العربية.</p>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full text-right font-semibold text-lg py-5 px-6 flex justify-between items-center" aria-expanded="false">
+                            كيف تضمنون سلامة أثاثي؟
+                            <span class="text-secondary text-2xl transform transition-transform duration-300">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                             <p class="text-gray-600 px-6 pb-5">نستخدم مواد تغليف عالية الجودة مصممة خصيصًا لكل نوع من الأثاث، وفريقنا مدرب على أحدث تقنيات التعامل الآمن مع المقتنيات الثمينة والقابلة للكسر.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="bg-primary py-16 md:py-24">
+            <div class="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white text-right">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">هل أنت جاهز لنقلة مريحة؟</h2>
+                    <p class="text-gray-300 mb-8 leading-relaxed">تواصل معنا اليوم للحصول على استشارة مجانية وعرض سعر مخصص لاحتياجاتك. فريقنا في انتظارك لتقديم أفضل خدمة ممكنة.</p>
+                    <div class="space-y-6 text-lg">
+                        <div class="flex items-center justify-end">
+                            <button class="call-btn hover:text-secondary transition-colors">01080837311</button>
+                            <i class="fas fa-phone-alt text-2xl ml-4 text-secondary"></i>
+                        </div>
+                        <div class="flex items-center justify-end">
+                            <a href="https://wa.me/201080837311" target="_blank" class="hover:text-secondary transition-colors">01080837311</a>
+                            <i class="fab fa-whatsapp text-2xl ml-4 text-secondary"></i>
+                        </div>
+                        <div class="flex items-center justify-end">
+                            <a href="mailto:" class="hover:text-secondary transition-colors"></a>
+                            <i class="fas fa-envelope text-2xl ml-4 text-secondary"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-2xl">
+                    <h3 class="text-2xl font-bold mb-2 text-primary text-right">اطلب عرض سعر سريع</h3>
+                    <p class="text-gray-500 mb-6 text-right">املأ النموذج وسنتواصل معك فوراً.</p>
+                    <form action="#" method="POST" class="space-y-4">
+                        <input type="text" placeholder="الاسم الكامل" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary text-right">
+                        <input type="tel" placeholder="رقم الهاتف" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary text-right">
+                        <textarea placeholder="تفاصيل الخدمة المطلوبة (مثال: نقل من... إلى...)" class="w-full p-3 rounded-md border border-gray-300 h-32 focus:outline-none focus:ring-2 focus:ring-secondary text-right"></textarea>
+                        <button type="submit" class="w-full bg-secondary text-white font-bold py-3 rounded-md hover:bg-opacity-90 transition-colors text-lg shadow-lg">إرسال الطلب</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-text text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4 text-right">
+             <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-1">
+                    <h4 class="text-xl font-bold text-white mb-4">شركة المازن إكسبريس</h4>
+                    <p class="text-gray-400 leading-relaxed">شريكك الأول في خدمات نقل العفش بأمان واحترافية في جميع أنحاء مصر.</p>
+                    <div class="flex justify-end space-x-4 space-x-reverse mt-6">
+                        <a href="#" class="text-gray-400 hover:text-secondary text-xl transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-secondary text-xl transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-secondary text-xl transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-secondary text-xl transition-colors"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-4">روابط سريعة</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-secondary transition-colors">الرئيسية</a></li>
+                        <li><a href="#about" class="hover:text-secondary transition-colors">من نحن</a></li>
+                        <li><a href="#services" class="hover:text-secondary transition-colors">خدماتنا</a></li>
+                        <li><a href="#contact" class="hover:text-secondary transition-colors">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-4">مناطق الخدمة</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>القاهرة والجيزة</li>
+                        <li>الإسكندرية</li>
+                        <li>الساحل الشمالي</li>
+                        <li>المدن الكبرى</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h4 class="text-xl font-bold text-white mb-4">صور من أعمالنا</h4>
+                    <div class="grid grid-cols-3 gap-2">
+                         <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/packing.jpg" class="rounded-md w-full h-auto object-cover aspect-square">
+                         <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/truck.jpg" class="rounded-md w-full h-auto object-cover aspect-square">
+                         <img src="images/worjers.jpg" class="rounded-md w-full h-auto object-cover aspect-square">
+                         <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/2workers.png" class="rounded-md w-full h-auto object-cover aspect-square">
+                         <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/packing2.jpeg" class="rounded-md w-full h-auto object-cover aspect-square">
+                         <img src="https://raw.githubusercontent.com/code-house10/aqsa-images/refs/heads/main/truck3.jpg" class="rounded-md w-full h-auto object-cover aspect-square">
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500 text-sm">
+                <p>&copy; 2024 شركة المازن إكسبريس. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Call Intent Modal -->
+    <div id="call-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden justify-center items-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md text-center relative">
+            <button id="modal-close-main" class="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            <!-- Step 1 -->
+            <div id="modal-step-1" class="modal-step active">
+                <h3 class="text-2xl font-bold mb-4 text-primary">هل أنت متأكد؟</h3>
+                <p class="text-gray-600 mb-6">سيؤدي هذا إلى بدء مكالمة هاتفية.</p>
+                <div class="flex justify-center gap-4">
+                    <button id="modal-cancel-1" class="bg-gray-300 text-gray-800 font-bold py-2 px-6 rounded-md hover:bg-gray-400">إلغاء</button>
+                    <button id="modal-next-1" class="bg-secondary text-white font-bold py-2 px-6 rounded-md hover:bg-opacity-90">نعم، متابعة</button>
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div id="modal-step-2" class="modal-step">
+                <h3 class="text-2xl font-bold mb-4 text-primary">خطوة إضافية للتأكيد</h3>
+                <p class="text-gray-600 mb-6">عاوز تعرف تكلفة نقل العفش بعد الخصم كام ؟</p>
+                 <div class="flex justify-center gap-4">
+                    <button id="modal-cancel-2" class="bg-gray-300 text-gray-800 font-bold py-2 px-6 rounded-md hover:bg-gray-400">إلغاء</button>
+                    <button id="modal-next-2" class="bg-secondary text-white font-bold py-2 px-6 rounded-md hover:bg-opacity-90">نعم اريد معرفة التكلفة</button>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div id="modal-step-3" class="modal-step">
+                <h3 class="text-2xl font-bold mb-4 text-primary">اضغط للاتصال</h3>
+                <p class="text-gray-600 mb-6">شكراً لاهتمامك! اضغط على الرقم أدناه للاتصال.</p>
+                <a href="tel:01080837311" id="final-call-btn" class="inline-flex items-center justify-center bg-green-500 text-white font-bold text-2xl py-4 px-8 rounded-full hover:bg-green-600 transition-transform transform hover:scale-105">
+                    <i class="fas fa-phone-alt ml-3"></i>
+                    <span>01080837311</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Hero Slideshow ---
+            const slides = document.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000); // Change slide every 5 seconds
+
+            // --- Mobile menu toggle ---
+            document.getElementById('mobile-toggle').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+
+            // --- Accordion ---
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const accordionContent = button.nextElementSibling;
+                    const icon = button.querySelector('i');
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    if (!isExpanded) {
+                        accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+                        icon.classList.replace('fa-plus', 'fa-minus');
+                        button.querySelector('span').classList.add('rotate-180');
+                    } else {
+                        accordionContent.style.maxHeight = '0px';
+                        icon.classList.replace('fa-minus', 'fa-plus');
+                        button.querySelector('span').classList.remove('rotate-180');
+                    }
+                });
+            });
+            
+            // --- Counter animation ---
+            const counters = document.querySelectorAll('[data-target]');
+            const animateCounter = (counter) => {
+                const target = +counter.getAttribute('data-target');
+                const prefix = counter.getAttribute('data-prefix') || '';
+                const suffix = counter.getAttribute('data-suffix') || '';
+                const speed = 200;
+                
+                const updateCount = () => {
+                    const count = +counter.innerText.replace(prefix, '').replace(suffix, '');
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = prefix + Math.ceil(count + inc) + suffix;
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = prefix + target + suffix;
+                    }
+                };
+                updateCount();
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            counters.forEach(counter => {
+                counter.innerText = '0';
+                observer.observe(counter);
+            });
+
+            // --- Countdown Timer for Offer Banner ---
+            const offerBanner = document.getElementById('offer-banner');
+            setTimeout(() => {
+                offerBanner.classList.remove('translate-y-full');
+            }, 1000);
+
+            function startCountdown() {
+                const countdownElement = document.getElementById('countdown');
+                if (!countdownElement) return;
+
+                let totalTime = 3 * 60 * 60; // 3 hours in seconds
+
+                const timer = setInterval(() => {
+                    if (totalTime <= 0) {
+                        clearInterval(timer);
+                        offerBanner.style.display = 'none';
+                        return;
+                    }
+                    totalTime--;
+                    let hours = Math.floor(totalTime / 3600);
+                    let minutes = Math.floor((totalTime % 3600) / 60);
+                    let seconds = totalTime % 60;
+                    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+                }, 1000);
+            }
+            startCountdown();
+            document.getElementById('close-banner').addEventListener('click', () => {
+                offerBanner.style.transform = 'translateY(150%)';
+            });
+
+            // --- Call Intent Modal ---
+            const callModal = document.getElementById('call-modal');
+            const callBtns = document.querySelectorAll('.call-btn');
+            const modalSteps = document.querySelectorAll('.modal-step');
+            
+            function showModal() {
+                callModal.classList.remove('hidden');
+                callModal.classList.add('flex');
+                goToStep(1);
+            }
+
+            function hideModal() {
+                callModal.classList.add('hidden');
+                callModal.classList.remove('flex');
+            }
+            
+            function goToStep(stepNumber) {
+                modalSteps.forEach(step => step.classList.remove('active'));
+                const targetStep = document.getElementById(`modal-step-${stepNumber}`);
+                if(targetStep) targetStep.classList.add('active');
+            }
+
+            callBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showModal();
+                });
+            });
+
+            document.getElementById('modal-next-1').addEventListener('click', () => goToStep(2));
+            document.getElementById('modal-next-2').addEventListener('click', () => goToStep(3));
+            document.getElementById('modal-cancel-1').addEventListener('click', hideModal);
+            document.getElementById('modal-cancel-2').addEventListener('click', hideModal);
+            document.getElementById('modal-close-main').addEventListener('click', hideModal);
+            
+            document.getElementById('final-call-btn').addEventListener('click', hideModal);
+
+            // --- Reviews Popup ---
+            const reviewsPopup = document.getElementById('reviews-popup');
+            const reviewContent = document.getElementById('review-content');
+            const reviewStars = document.getElementById('review-stars');
+            const closeReviewsBtn = document.getElementById('close-reviews');
+
+            const reviews = [
+                { name: 'محمد علي', rating: 5, text: 'تجربة ممتازة وسريعة. الفريق كان محترفًا جدًا.' },
+                { name: 'فاطمة السيد', rating: 5, text: 'أفضل شركة نقل تعاملت معها. كل شيء وصل سليمًا.' },
+                { name: 'أحمد إبراهيم', rating: 4, text: 'خدمة جيدة، تأخروا قليلاً عن الموعد لكن العمل كان متقنًا.' },
+                { name: 'سارة مصطفى', rating: 5, text: 'التغليف كان رائعًا، لم يخدش أي شيء. شكرًا لكم.' },
+                { name: 'يوسف خالد', rating: 5, text: 'دقة في المواعيد واحترافية في التعامل. أنصح بهم بشدة.' },
+                { name: 'هند رضا', rating: 5, text: 'أسعارهم معقولة جدًا مقارنة بجودة الخدمة. رائعون!' },
+                { name: 'كريم عبد الله', rating: 4, text: 'كل شيء كان جيدًا، أتمنى لو كان التواصل أسرع قليلاً.' },
+                { name: 'نور حسن', rating: 5, text: 'فك وتركيب الأثاث تم بحرفية عالية. فريق عمل متميز.' },
+                { name: 'علي محمود', rating: 5, text: 'سيارات مجهزة ونظيفة، والعاملون في قمة الاحترام.' },
+                { name: 'مريم سعيد', rating: 5, text: 'تجربة نقل مريحة وبدون أي قلق. سأتعامل معهم مرة أخرى.' },
+            ];
+            let currentReviewIndex = 0;
+
+            function showReview() {
+                const review = reviews[currentReviewIndex];
+                reviewContent.innerHTML = `
+                    <p class="text-sm text-gray-800 mb-2">"${review.text}"</p>
+                    <p class="text-xs font-bold text-primary text-left">- ${review.name}</p>
+                `;
+                let starsHTML = '';
+                for(let i=0; i<5; i++) {
+                    starsHTML += `<i class="fas fa-star ${i < review.rating ? 'text-accent' : 'text-gray-300'}"></i>`;
+                }
+                reviewStars.innerHTML = starsHTML;
+                
+                currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+            }
+
+            function startReviewCycle() {
+                setTimeout(() => {
+                    reviewsPopup.classList.add('show');
+                    showReview();
+                    setInterval(showReview, 7000); // Change review every 7 seconds
+                }, 2000); // Show popup after 2 seconds
+            }
+
+            closeReviewsBtn.addEventListener('click', () => {
+                reviewsPopup.classList.remove('show');
+            });
+
+            startReviewCycle();
+        });
+    </script>
+</body>
+</html>
